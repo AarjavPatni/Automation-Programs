@@ -1,0 +1,11 @@
+auto_todoist.py
+shortcuts.ahk
+sparkmail.ahk
+teams_shortcuts.ahk
+todoist_shortcuts.ahk
+unacademy_shortcuts.ahk
+
+unacademy-tasks.py
+**/*.env
+time-blocker-token.json
+time-blocker.json

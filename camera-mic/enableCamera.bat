@@ -1,0 +1,1 @@
+pythonw "C:\Users\Aarjav\Documents\Automation Programs\enableCamera.pyw"
