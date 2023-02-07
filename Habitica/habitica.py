@@ -5,9 +5,10 @@ import json
 import time
 import multiprocessing as mp
 import sys
+import concurrent.futures
 
 # Load habitica.env file and KEY variable
-dotenv.load_dotenv('/home/aarjav/Documents/Habitica/habitica.env')
+dotenv.load_dotenv(r'C:\Users\Aarjav\Documents\Automation-Programs\Habitica\habitica.env')
 KEY = os.getenv('KEY')
 USER = os.getenv('USER_KEY')
 USER_CLIENT = f'{USER}-Testing'
@@ -78,8 +79,8 @@ Enter difficulty: '''); print()
         if response.json()['success'] == False and response.json()['error'] == 'TooManyRequests': print("Too many requests!"); sys.exit()
         print(f'Edited for \"{list(tasks)[int(task)-1]["text"]}\"') if response.json()['success'] == True else print(f'Failed for \"{list(tasks)[int(task)-1]["text"]}\" because {response.json()["error"]}')
     
-    for task in tasks_to_edit:
-        mp.Process(target=edit_difficulty, args=(task,)).start()
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        results = [executor.submit(edit_difficulty, task) for task in tasks_to_edit]
 elif choice == 2:
     response = requests.get('https://habitica.com/api/v3/tags', headers={'x-api-user': USER, 'x-api-key': KEY, 'x-client': USER_CLIENT, 'Content-Type': 'application/json'})
     # Pretty print json
@@ -109,8 +110,8 @@ elif choice == 2:
         if response.json()['success'] == False and response.json()['error'] == 'TooManyRequests': print("Too many requests!"); sys.exit()
         print(f'Tagged \"{list(tasks)[int(task)-1]["text"]}\"') if response.json()['success'] == True else print(f'Failed to tag \"{list(tasks)[int(task)-1]["text"]}\" because {response.json()["error"]}')
     
-    for task in tasks_to_edit:
-        mp.Process(target=tagger, args=(task,)).start()
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        results = [executor.submit(tagger, task) for task in tasks_to_edit]
 elif choice == 3:
     choice = input('Today (1) or tomorrow (2) or enter date (3): '); print()
     if choice in ('1', ''):
@@ -120,17 +121,31 @@ elif choice == 3:
     else:
         date = input('Enter date (dd mm yyyy): '); print()
         date = time.strftime('%d %b %Y', time.strptime(date, '%d %b %Y'))
+    import concurrent.futures
+
     def change_due(task):
         response = requests.put('https://habitica.com/api/v3/tasks/' + tasks[int(task)-1]['id'], headers={'x-api-user': USER, 'x-api-key': KEY, 'x-client': USER_CLIENT, 'Content-Type': 'application/json'}, data=json.dumps({'date': date}))
-        if response.json()['success'] == False and response.json()['error'] == 'TooManyRequests': print("Too many requests!"); sys.exit()
-        print(f'Set for \"{list(tasks)[int(task)-1]["text"]}\"') if response.json()['success'] == True else print(f'Failed for \"{list(tasks)[int(task)-1]["text"]}\" because {response.json()["error"]}')
-    for task in tasks_to_edit:
-        mp.Process(target=change_due, args=(task,)).start()
+        if response.json()['success'] == False and response.json()['error'] == 'TooManyRequests': 
+            print("Too many requests!")
+            sys.exit()
+        if response.json()['success'] == True:
+            print(f'Set for \"{list(tasks)[int(task)-1]["text"]}\"')
+        else:
+            print(f'Failed for \"{list(tasks)[int(task)-1]["text"]}\" because {response.json()["error"]}')
+
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        results = [executor.submit(change_due, task) for task in tasks_to_edit]
+
 elif choice == 4:
     def delete(task):
         response = requests.delete('https://habitica.com/api/v3/tasks/' + tasks[int(task)-1]['id'], headers={'x-api-user': USER, 'x-api-key': KEY, 'x-client': USER_CLIENT, 'Content-Type': 'application/json'})
-        if response.json()['success'] == False and response.json()['error'] == 'TooManyRequests': print("Too many requests!"); sys.exit()
-        print(f'Deleted \"{list(tasks)[int(task)-1]["text"]}\"') if response.json()['success'] == True else print(f'Failed to delete \"{list(tasks)[int(task)-1]["text"]}\" because {response.json()["error"]}')
+        if response.json()['success'] == False and response.json()['error'] == 'TooManyRequests': 
+            print("Too many requests!")
+            sys.exit()
+        if response.json()['success'] == True:
+            print(f'Deleted \"{list(tasks)[int(task)-1]["text"]}\"')
+        else:
+            print(f'Failed to delete \"{list(tasks)[int(task)-1]["text"]}\" because {response.json()["error"]}')
 
-    for task in tasks_to_edit:
-        mp.Process(target=delete, args=(task,)).start()
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        results = [executor.submit(delete, task) for task in tasks_to_edit]

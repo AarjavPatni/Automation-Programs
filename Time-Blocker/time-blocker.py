@@ -64,9 +64,9 @@ def main():
             print(f'🧹 {event["summary"]}')
 
         notification.notify(
-            title="Time Blocker",
+            title="Time-Blocker",
             message = 'Cleared Calendar!',
-            app_icon=r"C:\Users\Aarjav\Documents\Automation-Programs\Time Blocker\schedule.ico",
+            app_icon=r"C:\Users\Aarjav\Documents\Automation-Programs\Time-Blocker\schedule.ico",
             )
 
         if not events:

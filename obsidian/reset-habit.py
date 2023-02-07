@@ -7,19 +7,18 @@ for i in os.walk(r"C:\Users\Aarjav\Documents\Second Brain\Goals"):
 
 write = False
 
-if input('Are you sure? (y/N) ').lower() == "y":
-    for i in dirList:
-        with open(i, "r", encoding="utf8") as f:
-            try:
-                content = f.read()
-                write = True
-            except:
-                write = False
+for i in dirList:
+    with open(i, "r", encoding="utf8") as f:
+        try:
+            content = f.read()
+            write = True
+        except Exception:
+            write = False
 
-        content = content.replace("- [x] Today", "- [ ] Today")
+    content = content.replace("- [x] Today", "- [ ] Today")
 
-        if write:
-            with open(i, "w", encoding="utf8") as f:
-                f.write(content)
+    if write:
+        with open(i, "w", encoding="utf8") as f:
+            f.write(content)
 
 print('Done! New day tomorrow!')

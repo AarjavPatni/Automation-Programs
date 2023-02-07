@@ -2,7 +2,7 @@ import os
 
 
 def svg_encode(svg):
-    # Ref: https://bl.ocks.org/jennyknuth/222825e315d45a738ed9d6e04c7a88d0
+    # Ref: https:\\\\bl.ocks.org\\jennyknuth\\222825e315d45a738ed9d6e04c7a88d0
     # Encode an SVG string so it can be embedded into a data URL.
     enc_chars = '"%#{}<>'  # Encode these to %hex
     enc_chars_maybe = "&|[]^`;?:@="  # Add to enc_chars on exception
@@ -22,9 +22,9 @@ def svg_encode(svg):
 dirList = []
 hidden = [".trash", ".stfolder", ".stversions", ".obsidian"]
 
-for i in os.walk("/home/aarjav/Documents/Second Brain"):
+for i in os.walk("C:\\Users\\Aarjav\\Documents\\Second Brain\\"):
     dirList.append(
-        i[0].replace("/home/aarjav/Documents/Second Brain/", "")
+        i[0].replace("C:\\Users\\Aarjav\\Documents\\Second Brain\\", "").replace("\\", "/")
     ) if not bool([ele for ele in hidden if (ele in i[0])]) else None
 
 for count, k in enumerate(dirList):
@@ -44,7 +44,7 @@ code = f""".theme-light div.nav-folder-title[data-path="{folder}"] div.nav-folde
 	content: url("{svg.replace("svg+xml,%3Csvg xmlns", "svg+xml,%3Csvg fill='white' xmlns")}")
 }}"""
 
-with open("/home/aarjav/Documents/Second Brain/.obsidian/snippets/icons.css", "a") as f:
+with open("C:\\Users\\Aarjav\\Documents\\Second Brain\\.obsidian\\snippets\\icons.css", "a") as f:
     f.write("\n" + code + "\n")
 
 print("Done!")
