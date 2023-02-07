@@ -1,19 +1,16 @@
 from cgitb import reset
 import os
-from signal import pause
 import time
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 from re import finditer, sub
 from pathlib import Path
 
-os.popen('notify-send "JEE Renamer" "Script started!"')
-
 time.perf_counter()
 tic = time.perf_counter() - 25
 
 class OnMyWatch:
-    watchDirectory = "/home/aarjav/pCloudDrive/IIT JEE Notes"
+    watchDirectory = r"P:\IIT JEE Notes"
   
     def __init__(self):
         self.observer = Observer()
@@ -57,15 +54,14 @@ class Handler(FileSystemEventHandler):
 def rename(file):
     global tic
     tic = time.perf_counter()
-    os.popen('notify-send "JEE Renamer" "Detected Changes!"')
     time.sleep(10)
-    path = file[:max([i.start() for i in finditer('/', file)])]
+    path = '\\'.join(file.split('\\')[:-1])
     file_paths = sorted(Path(path).iterdir(), key=os.path.getctime)
     counter = 1
     dcs_counter = 1
     for name in file_paths:
         if str(name).endswith('.pdf'):
-            baseName = str(name)[max([i.start() for i in finditer('/', str(name))])+1:]
+            baseName = str(name).split('\\')[-1]
             baseName = sub('L\d* ', '', baseName)
             baseName = baseName.replace('_', ' ')
             baseName = baseName.replace('  ', ' ')
@@ -74,11 +70,9 @@ def rename(file):
             baseName = sub(' \(\d*\)', '', baseName)
             baseName = sub('(DCS).*[^.pdf]', f'DCS-{dcs_counter}', baseName)
             dcs_counter += 1 if 'DCS' in baseName else 0
-            print(dcs_counter)
             baseName = f'L{counter} {baseName}'
             newName = f'{path}/{baseName}'
             os.rename(str(name), newName)
-            print(str(name)[max([i.start() for i in finditer('/', str(name))])+1:], baseName)
             counter += 1
 
 if __name__ == '__main__':
