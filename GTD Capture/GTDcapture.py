@@ -1,8 +1,7 @@
+# -*- coding: utf-8 -*-
 # import json
 # import os
 # import readline
-import time
-from pathlib import Path
 
 # from threading import Thread
 
@@ -10,6 +9,9 @@ from pathlib import Path
 # from dotenv import load_dotenv
 # from pyautogui import hotkey
 
+
+import time
+from pathlib import Path
 
 def printByChar(string, ends="\n"):
     for char in string:
@@ -109,78 +111,79 @@ print(
 1. academics (a)
 2. research-topics (r)
 3. thoughts (t)
-4. to-note (n)
-5. tweet ideas (tw)
+4. geeky todos (g)
+5. to-note (n)
+6. tweet ideas (tw)
 """
 )
 
 
-endCharList = ["a", "r", "t", "n", "tw"]
+endCharList = ["a", "t", "n", "r", "g", "tw"]
 
-tagsList = ["01 Academics", "04 Research Topics", "02 Thoughts", "03 To-Note", "05 Tweet Ideas"]
+tagsList = ["01 Academics", "02 Thoughts", "03 To-Note", "04 Research Topics", "05 Geeky Todos", "06 Tweet Ideas"]
 
 
-# def findItem(theList, item):
-#     return [
-#         (ind, theList[ind].index(item))
-#         for ind in range(len(theList))
-#         if item in theList[ind]
-#     ]
+'''def findItem(theList, item):
+    return [
+        (ind, theList[ind].index(item))
+        for ind in range(len(theList))
+        if item in theList[ind]
+    ]
 
-# while True:
-#     tagsDict = {
-#         "Academics": ["a"],
-#         "Research Topics": ["r"],
-#         "Thoughts": ["t"],
-#         "To-Note": ["n"],
-#         "Tweet Ideas": ["tw"],
-#         "Others": ["o"],
-#     }
+while True:
+    tagsDict = {
+        "Academics": ["a"],
+        "Research Topics": ["r"],
+        "Thoughts": ["t"],
+        "To-Note": ["n"],
+        "Tweet Ideas": ["tw"],
+        "Others": ["o"],
+    }
 
-#     inputData = input()
-#     tagsLoc = []
+    inputData = input()
+    tagsLoc = []
 
-#     with open("/home/aarjav/Documents/Second Brain/Inbox.md", "r") as f:
-#         content = f.readlines()  # Read the file contents
-#         for count, i in enumerate(content, start=0):
-#             if i.startswith("#"):  # Check if line is heading
-#                 i = i.replace("\n", "")
-#                 tagsDict[i.replace("# ", "")].append(
-#                     count
-#                 )  # Add line number to the list of tag found
+    with open("/home/aarjav/Documents/Second Brain/Inbox.md", "r") as f:
+        content = f.readlines()  # Read the file contents
+        for count, i in enumerate(content, start=0):
+            if i.startswith("#"):  # Check if line is heading
+                i = i.replace("\n", "")
+                tagsDict[i.replace("# ", "")].append(
+                    count
+                )  # Add line number to the list of tag found
 
-#     endChar = inputData.split(" ")[-1]  # Get the inputted tag
-#     inputData = (
-#         " ".join(inputData.split(" ")[:-1])
-#         if inputData.split(" ")[-1] in endCharList
-#         else inputData
-#     )
+    endChar = inputData.split(" ")[-1]  # Get the inputted tag
+    inputData = (
+        " ".join(inputData.split(" ")[:-1])
+        if inputData.split(" ")[-1] in endCharList
+        else inputData
+    )
 
-#     try:
-#         if endChar in endCharList:
-#             content.insert(
-#                 tagsDict[
-#                     list(tagsDict.keys())[
-#                         findItem(list(tagsDict.values()), endChar)[0][0] + 1
-#                     ]
-#                 ][1]
-#                 - 2,
-#                 inputData + "\n",
-#             )
-#         else:
-#             content.append(inputData + "\n")
-#     except Exception as e:
-#         print(e)
-#         content.append(inputData)
+    try:
+        if endChar in endCharList:
+            content.insert(
+                tagsDict[
+                    list(tagsDict.keys())[
+                        findItem(list(tagsDict.values()), endChar)[0][0] + 1
+                    ]
+                ][1]
+                - 2,
+                inputData + "\n",
+            )
+        else:
+            content.append(inputData + "\n")
+    except Exception as e:
+        print(e)
+        content.append(inputData)
 
-#     with open("/home/aarjav/Documents/Second Brain/Inbox.md", "w") as f:
-#         f.writelines(content)
+    with open("/home/aarjav/Documents/Second Brain/Inbox.md", "w") as f:
+        f.writelines(content)
 
-#     print("\x1b[1A" + f"\x1b[{len(inputData) + 1}C" + " ✅")
+    print("\x1b[1A" + f"\x1b[{len(inputData) + 1}C" + " ✅")'''
 
 
 while True:
-    inputData = input()
+    inputData = input().replace("\u2192", "->")
     endChar = inputData.split(" ")[-1]
 
     inputData = (
@@ -189,14 +192,16 @@ while True:
         else inputData
     )
 
+    inputData = f'- [ ] {inputData[2:]}\n' if inputData[0:2] == 'o ' else inputData
+
     if endChar in endCharList:
         with open(
             Path(f"C:/Users/Aarjav/Documents/Second Brain/Inbox/{tagsList[endCharList.index(endChar)]}.md"),
-            "a",
+            "a", encoding='utf-8'
         ) as f:
-            f.writelines(f'\n{inputData}')
+            f.writelines(f'\n{inputData}'.replace('->', '\u2192'))
     else:
-        with open(Path("C:/Users/Aarjav/Documents/Second Brain/Inbox/Others.md"), "a") as f:
-            f.writelines(f'\n{inputData}')
+        with open(Path("C:/Users/Aarjav/Documents/Second Brain/Inbox/02 Thoughts.md"), "a", encoding='utf-8') as f:
+            f.writelines(f'\n{inputData}'.replace('->', '\u2192'))
 
     print("\x1b[1A" + f"\x1b[{len(inputData) + 1}C" + " ✅")
