@@ -1,10 +1,7 @@
-
-from this import d
 from selenium import webdriver
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait as wait
 from time import sleep
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.action_chains import ActionChains
 from pyautogui import click as c
 import sys
 
@@ -12,54 +9,53 @@ import sys
 url = sys.argv[1]
 url = url.split(" ")
 for j in url:
-    start = int(input("Which lecture to start from? "))
-    if start == "":
-        start = 1
+    start = input("Which lecture to start from? ")
+    start = 1 if start == "" else int(start)
 
-    options = webdriver.ChromeOptions()
-    brave_path = r"C:\Program Files (x86)\BraveSoftware\Brave-Browser\Application\brave.exe"
-    options.binary_location = brave_path
+    options = webdriver.EdgeOptions()
+    edge_path = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+    options.binary_location = edge_path
 
     options.add_argument(
-        r"user-data-dir=C:\Users\Aarjav\AppData\Local\BraveSoftware\Brave-Browser\User Data"
+        r"user-data-dir=C:\Users\Aarjav\AppData\Local\Microsoft\Edge\User Data"
     )
     options.add_argument("--disable-extensions")
+    options.add_argument("profile-directory=Default")
+    options.add_argument("--remote-debugging-port=9222")
 
-    driver = webdriver.Chrome(
-        chrome_options=options, executable_path=r"C:\Users\Aarjav\bravedriver.exe"
-    )
+    driver = webdriver.Edge(r"C:\Users\Aarjav\edgedriver.exe", options=options)
 
-    brave_path = "C:/Program Files (x86)/BraveSoftware/Brave-Browser/Application/brave.exe"
+    edge_path = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
 
     driver.get(j)
-    pdfs = driver.find_elements_by_xpath(
-        "//div[@class='ItemCard__MenuButton-sc-xrh60s-3 eNUrNs menuButton']"
+    pdfs = driver.find_elements(
+        By.XPATH, 
+        "//div[@class='menuButton css-yk3n3m-MenuButton ecq12m83']"
     )
     try:
-        resume = driver.find_element_by_xpath("//h4[contains( text( ), 'Resume' )]")
+        resume = driver.find_element(By.XPATH, "//h4[contains( text( ), 'Resume' )]")
         skip = True
     except:
         skip = False
 
     for i in pdfs:
-        driver.execute_script("window.scrollBy(0, 150)", "")
+        wait(driver, 30).until(lambda x: x.find_elements(By.XPATH, "//div[@class='menuButton css-yk3n3m-MenuButton ecq12m83']"))
+        driver.execute_script("window.scrollBy(0, 180)", "")
         if skip == True:
             skip = False
             continue
-        if start != "":
-            if start != 1:
-                start -= 1
-                continue
+        if start != 1:
+            start -= 1
+            continue
         i.click()
         sleep(1)
-        link = driver.find_elements_by_xpath("//p[contains( text( ), 'With annotation' )]")
+        link = driver.find_elements(By.XPATH, "//p[contains( text( ), 'With annotation' )]")
         if isinstance(link, list):
             link[0].click()
         else:
             link.click()
-        sleep(4)
+        wait(driver, 30).until(lambda x: x.find_elements(By.XPATH, "//div[@class='menuButton css-yk3n3m-MenuButton ecq12m83']"))
         c(x=222, y=543)
+    
+    sleep(2)
     driver.quit()
-
-for j in url:
-    keys = 
