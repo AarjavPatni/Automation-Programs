@@ -30,7 +30,7 @@
 mwt_MaxWindows = 50
 
 ; This is the hotkey used to hide the active window:
-mwt_Hotkey = #+h ; Win+H
+mwt_Hotkey = #u ; Win+H
 
 ; This is the hotkey used to unhide the last hidden window:
 mwt_UnHotkey = #+u  ; Win+U
