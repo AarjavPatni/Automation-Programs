@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from winsound import PlaySound as play
 from winsound import SND_FILENAME
 from time import sleep
+import os
 
 with open('songs.txt') as f:
     list = [line for line in f]
@@ -16,11 +17,15 @@ options = webdriver.EdgeOptions()
 options.page_load_strategy = 'eager'
 options.add_experimental_option('excludeSwitches', ['enable-logging'])
 # options.add_argument("--headless")
-driver = webdriver.Edge(executable_path=r'C:\Users\Aarjav\msedgedriver.exe', options=options)
+driver = webdriver.Edge(
+    executable_path=r'C:\Users\Aarjav\msedgedriver.exe', options=options)
 
 
 # Loop through each element in the lists
 for i in range(len(songs)):
+    if any(songs[i] in element for element in os.listdir(r'C:\Users\Aarjav\Downloads')):
+        continue
+
     driver.get('https://pagalfree.com/')
 
     try:
@@ -64,3 +69,5 @@ for i in range(len(songs)):
 
     driver.execute_script("window.open('about:blank', 'blank');")
     driver.switch_to.window(driver.window_handles[1])
+
+sleep(120)
