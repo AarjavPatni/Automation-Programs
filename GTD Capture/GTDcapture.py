@@ -13,6 +13,7 @@
 import time
 from pathlib import Path
 
+
 def printByChar(string, ends="\n"):
     for char in string:
         print(char, end="", flush=True)
@@ -21,106 +22,106 @@ def printByChar(string, ends="\n"):
         print()
 
 
-# response_code_list = []
+""" response_code_list = []
 
-# load_dotenv(r"/home/aarjav/Documents/GTD Capture/NOTION_KEY.env")
-# NOTION_KEY = os.getenv("NOTION_KEY")
+load_dotenv(r"/home/aarjav/Documents/GTD Capture/NOTION_KEY.env")
+NOTION_KEY = os.getenv("NOTION_KEY")
 
-# headers = {
-#     "Authorization": "Bearer {}".format(NOTION_KEY),
-#     "Notion-Version": "2021-08-16",
-#     "Content-Type": "application/json",
-# }
+headers = {
+    "Authorization": "Bearer {}".format(NOTION_KEY),
+    "Notion-Version": "2021-08-16",
+    "Content-Type": "application/json",
+}
 
-# url = r"
-#   https://api.notion.com/v1/blocks/87ff453d-6ad8-45ee-8aac-97234dd74c54/children
-#   "
-# page_id = "87ff453d-6ad8-45ee-8aac-97234dd74c54"
-
-
-# def capture(element):
-#     data = {
-#         "children": [
-#             {
-#                 "object": "block",
-#                 "type": "paragraph",
-#                 "paragraph": {
-#                     "text": [
-#                         {
-#                             "type": "text",
-#                             "text": {
-#                                 "content": element,
-#                                 "link": None,
-#                             },
-#                         }
-#                     ]
-#                 },
-#             }
-#         ]
-#     }
-#     # Send data to Notion using data variable
-#     response = requests.patch(
-#                           data=json.dumps(data), headers=headers, url=url
-#                       )
-#     response_code_list.append(response.status_code)
+url = r"
+  https://api.notion.com/v1/blocks/87ff453d-6ad8-45ee-8aac-97234dd74c54/children
+  "
+page_id = "87ff453d-6ad8-45ee-8aac-97234dd74c54"
 
 
-# def captureTweet(element):
-#     url = "https://api.notion.com/v1/pages"
-
-#     payload = {
-#         "parent": {
-#             "type": "database_id",
-#             "database_id": "4b3d588e0c6f43eeb99d8c02910dd26b",
-#         },
-#         "properties": {
-#             "Idea": {
-#                 "type": "title",
-#                 "title": [{ "type": "text", "text": { "content": element } }]
-#             },
-#         }
-#     }
-
-#     response = requests.post(url, json=payload, headers=headers)
-
-#     print(response.text)
-
-
-# print("Press Ctrl+C or enter q to quit. Start with 't ' for a Tweet idea.")
-# while True:
-#     try:
-#         # Start a new thread to capture the input
-#         inputData = input()
-#         if inputData.lower() == "q":
-#             break
-#         if inputData != "":
-#             if inputData[0:2] == "t ":
-#                 Thread(target=captureTweet, args=(inputData,)).start()
-#             else:
-#                 Thread(target=capture, args=(inputData,)).start()
-#     except KeyboardInterrupt:
-#         inputData = list(set(response_code_list))
-#         if len(response_code_list) > 1:
-#             sp.run(["notify-send", "GTD Capture", "Error!"])
-#         else:
-#             sp.run(["notify-send", "GTD Capture", "Captured!"])
-#         break
-
-print(
-    """Tags:
-1. academics (a)
-2. research-topics (r)
-3. thoughts (t)
-4. geeky todos (g)
-5. to-note (n)
-6. tweet ideas (tw)
-"""
-)
+def capture(element):
+    data = {
+        "children": [
+            {
+                "object": "block",
+                "type": "paragraph",
+                "paragraph": {
+                    "text": [
+                        {
+                            "type": "text",
+                            "text": {
+                                "content": element,
+                                "link": None,
+                            },
+                        }
+                    ]
+                },
+            }
+        ]
+    }
+    # Send data to Notion using data variable
+    response = requests.patch(
+                          data=json.dumps(data), headers=headers, url=url
+                      )
+    response_code_list.append(response.status_code)
 
 
-endCharList = ["a", "t", "n", "r", "g", "tw"]
+def captureTweet(element):
+    url = "https://api.notion.com/v1/pages"
 
-tagsList = ["01 Academics", "02 Thoughts", "03 To-Note", "04 Research Topics", "05 Geeky Todos", "06 Tweet Ideas"]
+    payload = {
+        "parent": {
+            "type": "database_id",
+            "database_id": "4b3d588e0c6f43eeb99d8c02910dd26b",
+        },
+        "properties": {
+            "Idea": {
+                "type": "title",
+                "title": [{ "type": "text", "text": { "content": element } }]
+            },
+        }
+    }
+
+    response = requests.post(url, json=payload, headers=headers)
+
+    print(response.text)
+
+
+print("Press Ctrl+C or enter q to quit. Start with 't ' for a Tweet idea.")
+while True:
+    try:
+        # Start a new thread to capture the input
+        inputData = input()
+        if inputData.lower() == "q":
+            break
+        if inputData != "":
+            if inputData[0:2] == "t ":
+                Thread(target=captureTweet, args=(inputData,)).start()
+            else:
+                Thread(target=capture, args=(inputData,)).start()
+    except KeyboardInterrupt:
+        inputData = list(set(response_code_list))
+        if len(response_code_list) > 1:
+            sp.run(["notify-send", "GTD Capture", "Error!"])
+        else:
+            sp.run(["notify-send", "GTD Capture", "Captured!"])
+        break """
+
+gtdlists = {
+    'a': '01 Academics',
+    't': '02 Thoughts',
+    'n': '03 To-Note',
+    'r': '04 Research Topics',
+    'g': '05 Geeky Todos',
+    'd': '06 Post-Decisions Research',
+    'f': '07 Future Todos',
+}
+
+print('Tags: ')
+for i in gtdlists:
+    print(f'   {gtdlists[i][3:]} ({i})')
+
+print()
 
 
 '''def findItem(theList, item):
@@ -188,15 +189,19 @@ while True:
 
     inputData = (
         " ".join(inputData.split(" ")[:-1])
-        if inputData.split(" ")[-1] in endCharList
+        if inputData.split(" ")[-1] in gtdlists
         else inputData
     )
 
-    inputData = f'- [ ] {inputData[2:]}\n' if inputData[0:2] == 'o ' else inputData
+    if inputData[0:2] == 'o ':
+        inputData = f'- [ ] {inputData[2:]}\n'
+    if inputData[-2:] == ' i':
+        inputData = f'=={inputData[:-2]}==\n'
 
-    if endChar in endCharList:
+    if endChar in gtdlists:
         with open(
-            Path(f"C:/Users/Aarjav/Documents/Second Brain/Inbox/{tagsList[endCharList.index(endChar)]}.md"),
+            Path(
+                f"C:/Users/Aarjav/Documents/Second Brain/Inbox/{gtdlists[endChar]}.md"),
             "a", encoding='utf-8'
         ) as f:
             f.writelines(f'\n{inputData}'.replace('->', '\u2192'))

@@ -10,7 +10,7 @@ import concurrent.futures
 # Load habitica.env file and KEY variable
 dotenv.load_dotenv(r'C:\Users\Aarjav\Documents\Automation-Programs\Habitica\habitica.env')
 KEY = os.getenv('KEY')
-USER = os.getenv('USER_KEY')
+USER = os.getenv('ID')
 USER_CLIENT = f'{USER}-Testing'
 
 # Use GET to get tasks. Request url = 'https://habitica.com/api/v3/tasks/user'. Query = type:"todos"
