@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 
+os.system(r"wsl '/mnt/c/Program Files/Cold Turkey/Cold Turkey Blocker.exe' -start 'GTD Clear' -lock 20 &")
 os.system(r'wsl cp ~/Documents/Second\ Brain/Inbox/02\ Thoughts.md ~/Documents/Second\ Brain/Inbox/gtdtemp.md')
 
 with open(r'C:\Users\Aarjav\Documents\Second Brain\Inbox\02 Thoughts.md', 'r') as f:
