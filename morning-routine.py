@@ -59,7 +59,7 @@ if len(args) == 2:
 hk('win', 'up')
 
 load_dotenv(
-    dotenv_path=r'C:\Users\Aarjav\Documents\Automation-Programs\Todoist-Hyperscheduler\todoist.env')
+    dotenv_path=r'C:\Users\Aarjav\Documents\Automation-Programs\Todoist\todoist.env')
 load_dotenv(
     r'C:\Users\Aarjav\Documents\Automation-Programs\Habitica\habitica.env')
 
