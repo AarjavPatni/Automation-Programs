@@ -36,7 +36,7 @@ SetDefaultMouseSpeed, 0
 #z:: run "pythonw" "C:\Users\Aarjav\Documents\TimeTrackr\trackr.py" "running"
 #+g:: run "python" "C:\Users\Aarjav\Documents\TimeTrackr\trackr.py" "gsheets"
 #+e:: run "pythonw" "C:\Users\Aarjav\Documents\TimeTrackr\trackr.py" "export" "today"
-#+f:: run "pythonw" "C:\Users\Aarjav\Documents\Automation-Programs\Cold Turkey\focus.pyw"
+#+f:: run "pythonw" "C:\Users\Aarjav\Documents\Automation-Programs\Cold Turkey\focus.pyw.lnk"
 !+b:: run "python" "C:\Users\Aarjav\Documents\Automation-Programs\Cold Turkey\add2block.pyw"
 
 #IfWinActive ahk_exe Obsidian.exe
