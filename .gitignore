@@ -2,6 +2,7 @@ auto_todoist.py
 unacademy-tasks.py
 
 **/*.env
+**/*.lnk
 time-blocker-token.json
 time-blocker.json
 unacademy.txt
