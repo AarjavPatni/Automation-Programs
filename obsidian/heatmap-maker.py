@@ -41,8 +41,8 @@ for habit in habits:
         # format as dd mmmm 'yy
         habits[habit]['startDateText'] = day_one.strftime('%d %B %Y')
 
-# function = '\n\nfunction App() {\n'
-function = ''
+function = '\n\nfunction App() {\n'
+# function = ''
 colours = {
     'Awake on First Alarm.md': 'ffba08',  # golden
     'Workout.md': '7678ed',  # yellow green
@@ -108,7 +108,7 @@ for num, i in enumerate(habits, 5):
     }}),
     '''
 
-# function += ');\n}'
+function += ');\n}'
 
 navbar = '  <nav>\n    <ul>\n'
 
@@ -124,7 +124,7 @@ navbar += '\n    </ul>\n  </nav>'
 with open(r'C:\Users\Aarjav\Documents\Automation-Programs\obsidian\heatmap.html', 'r', encoding='utf-8') as f:
     content = f.read()
     content = re.sub(
-        r'/function\s+(\w+)\s*\([^)]*\)\s*{((?:[^{}]+|{(?:[^{}]+|{[^{}]*})*})*)\s*}/', function, content)
+        r'function App\(\)\s*{((?:[^{}]+|{(?:[^{}]+|{[^{}]*})*})*)\s*}', function, content)
     content = re.sub(r'\s<nav>([\s\S]*?)<\/nav>', navbar, content)
     with open(r'C:\Users\Aarjav\Documents\Automation-Programs\obsidian\heatmap.html', 'w', encoding='utf-8') as f:
         f.write(content)
