@@ -52,13 +52,13 @@ colours = {
     'Workout.md': '7678ed',  # yellow green
     'Meditation.md': '7678ed',  # yellow green
     'Fiction.md': '29BF12',  # green
-    'JustinGuitar & YGA.md': 'ff8800',  # orange
+    'Guitar.md': 'ff8800',  # orange
+    'Math Prep for College.md': '3a86ff',  # blue
     'Touch Typing.md': '00CCCC',  # turquoise
     'Laser Focus.md': 'f94144',  # red
     'Journaling.md': '06d6a0',  # aqua
     'Brush @ Night.md': 'f4978e',  # peach
-    'Water Floss.md': 'f4978e',  # purple
-    'Math Prep for College.md': '3a86ff'
+    'Water Floss.md': 'f4978e'  # purple
 }
 
 for i in colours.keys():
