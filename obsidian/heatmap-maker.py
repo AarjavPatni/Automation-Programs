@@ -22,9 +22,13 @@ for habit in habits:
         content = f.read()
         day_one = content.split('day-one:')[1].split('\n')[0].strip()
         day_one = pendulum.parse(day_one)
-        skips_dates = content.split(
-            'skips-dates:')[1].split('---')[0].strip().replace('- ', '').split('\n')
-        skips_dates = list(filter(None, skips_dates))
+        try:
+            skips_dates = content.split(
+                'skips-dates:')[1].split('---')[0].strip().replace('- ', '').split('\n')
+            skips_dates = list(filter(None, skips_dates))
+        except Exception:
+            skips_dates = []
+
         print(skips_dates)
         all_dates = [day_one.add(days=i).strftime('%Y-%m-%d')
                      for i in range((pendulum.now() - day_one).days + 1)]
