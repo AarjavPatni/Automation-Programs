@@ -7,9 +7,7 @@ sleep, 3
 
 ; Set the title of the windows to hide
 window1Title = C:\Syncthing\syncthing.exe
-window2Title = C:\Windows\System32\bash.exe
-window3Title = C:\Program Files\Git\cmd\git.exe
-
+window2Title = C:\WINDOWS\system32\wsl.EXE
 
 ; Set up a loop that will keep checking for the two windows
 while (true) {
@@ -27,14 +25,6 @@ while (true) {
         {
             ; Hide the window and show a tray icon for it
             WinHide, %window2Title%
-            check++
-        }
-
-    ; Check if the second window is open
-    IfWinExist, %window3Title%
-        {
-            ; Hide the window and show a tray icon for it
-            WinHide, %window3Title%
             check++
         }
 
