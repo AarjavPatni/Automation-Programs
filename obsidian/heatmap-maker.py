@@ -57,7 +57,8 @@ colours = {
     'Laser Focus.md': 'f94144',  # red
     'Journaling.md': '06d6a0',  # aqua
     'Brush @ Night.md': 'f4978e',  # peach
-    'Water Floss.md': 'f4978e'  # purple
+    'Water Floss.md': 'f4978e',  # purple
+    'Math Prep for College.md': '3a86ff'
 }
 
 for i in colours.keys():
