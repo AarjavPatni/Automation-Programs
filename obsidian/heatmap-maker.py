@@ -53,6 +53,7 @@ colours = {
     'Meditation.md': '7678ed',  # yellow green
     'Fiction.md': '29BF12',  # green
     'Guitar.md': 'ff8800',  # orange
+    'DSA Trackr.md': '3a86ff',  # blue
     'Math Prep for College.md': '3a86ff',  # blue
     'Touch Typing.md': '00CCCC',  # turquoise
     'Laser Focus.md': 'f94144',  # red
