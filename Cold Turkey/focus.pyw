@@ -16,19 +16,22 @@ start = perf_counter()
 # print(pnames)
 while perf_counter() - start < duration*60:
     killed = False
-    pids = [p.pid for p in process_iter()]
+    # pids = [p.pid for p in process_iter()]
     pnames = [p.name() for p in process_iter()]
 
     if 'CTMsgHostEdge.exe' not in pnames:
-        print('Killing...')
         # kill msedge.exe
         for proc in process_iter():
             if proc.name() == 'msedge.exe':
                 try:
-                    proc.kill()
-                    killed = True
+                    sleep(15)
+                    pnames = [p.name() for p in process_iter()]
+                    if 'CTMsgHostEdge.exe' not in pnames:
+                        print('Killing')
+                        proc.kill()
+                        killed = True
                 except:
                     pass
 
-    if killed:
-        sleep(15)
+    # if killed:
+        # sleep(15)
