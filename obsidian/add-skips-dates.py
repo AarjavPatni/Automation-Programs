@@ -1,5 +1,4 @@
 import os
-import re
 import pendulum
 
 # Set the directory where your markdown files are located
@@ -16,7 +15,7 @@ def find_markdown_files(directory):
         path = os.path.join(directory, filename)
         if os.path.isdir(path):
             find_markdown_files(path)
-        elif filename.endswith('.md'):
+        elif filename.endswith('.md') and filename != r'Trackr.md':
             # Read the contents of the file
             with open(path, 'r', encoding='utf-8') as file:
                 contents = file.read()
