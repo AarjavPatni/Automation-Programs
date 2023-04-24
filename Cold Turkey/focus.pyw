@@ -3,7 +3,7 @@ from psutil import process_iter
 from time import perf_counter, sleep
 from os import system
 from datetime import datetime as dt
-from multiprocessing import Process
+from threading import Thread
 
 if dt.now().hour >= 22:
     system("wsl '/mnt/c/Program Files/Cold Turkey/Cold Turkey Blocker.exe' -start 'Distractions' -lock 300 &")
@@ -24,8 +24,7 @@ def kill_winget():
                 proc.kill()
 
 
-Process(target=kill_winget).start()
-
+Thread(target=kill_winget).start()
 
 # print(pnames)
 while perf_counter() - start < duration*60:
@@ -43,6 +42,3 @@ while perf_counter() - start < duration*60:
                     proc.kill() if 'CTMsgHostEdge.exe' not in pnames else None
                 except:
                     pass
-
-    # if killed:
-        # sleep(15)
