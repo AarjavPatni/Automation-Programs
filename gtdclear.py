@@ -11,6 +11,7 @@ with open(r'C:\Users\Aarjav\Documents\Second Brain\Inbox\02 Thoughts.md', 'r') a
 
 move_list = []
 todo_list = []
+do_now_list = []
 
 print('''Options:
 1. Do Now (n)
@@ -30,12 +31,7 @@ for i in lines:
     while again:
         option = input().lower()
         if option == 'n':
-            with open(r'C:\Users\Aarjav\Documents\Second Brain\Inbox\02 Thoughts.md', 'a') as f:
-                try:
-                    f.readlines()
-                except Exception:
-                    f.writelines('## Do Now\n')
-                f.writelines(f'{i}')
+            do_now_list.append(i)
             print('\x1b[1A' + f"\x1b[{len(i) + 1}C" + " ✅")
         elif option == 'm':
             move_list.append(i)
@@ -52,11 +48,17 @@ for i in lines:
 
         again = False
 
+if do_now_list:
+    with open(r'C:\Users\Aarjav\Documents\Second Brain\Inbox\02 Thoughts.md', 'a') as f:
+        f.writelines('## Do Now\n')
+        for i in do_now_list:
+            f.writelines(f'{i}')
+
 if todo_list:
     with open(r'C:\Users\Aarjav\Documents\Second Brain\Inbox\02 Thoughts.md', 'a') as f:
-        f.writelines('\n\n---\n## Add to todo list')
+        f.writelines('\n\n---\n## Add to todo list\n')
         for i in todo_list:
-            f.writelines(f'{i}\n')
+            f.writelines(f'{i}')
 
 if move_list:
     print()
