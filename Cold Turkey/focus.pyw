@@ -9,8 +9,8 @@ if dt.now().hour >= 22:
     system("wsl '/mnt/c/Program Files/Cold Turkey/Cold Turkey Blocker.exe' -start 'Distractions' -lock 300 &")
     duration = 300
 else:
-    system("wsl '/mnt/c/Program Files/Cold Turkey/Cold Turkey Blocker.exe' -start 'Distractions' -lock 60 &")
-    duration = 60
+    system("wsl '/mnt/c/Program Files/Cold Turkey/Cold Turkey Blocker.exe' -start 'Distractions' -lock 120 &")
+    duration = 120
 
 start = perf_counter()
 
@@ -20,7 +20,7 @@ start = perf_counter()
 def kill_winget():
     while perf_counter() - start < duration*60:
         for proc in process_iter():
-            if 'winget' in proc.name():
+            if ('winget' in proc.name()) or ('unins000' in proc.name()):
                 proc.kill()
 
 
@@ -34,11 +34,11 @@ while perf_counter() - start < duration*60:
 
     if 'CTMsgHostEdge.exe' not in pnames:
         # kill msedge.exe
-        for proc in process_iter():
-            if proc.name() == 'msedge.exe':
+        sleep(20)
+        pnames = [p.name() for p in process_iter()]
+        if 'CTMsgHostEdge.exe' not in pnames:
+            for proc in process_iter():
                 try:
-                    sleep(15)
-                    pnames = [p.name() for p in process_iter()]
-                    proc.kill() if 'CTMsgHostEdge.exe' not in pnames else None
+                    proc.kill() if proc.name() == 'msedge.exe' else None
                 except:
                     pass
