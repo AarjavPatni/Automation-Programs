@@ -52,10 +52,13 @@ colours = {
     'Workout.md': '7678ed',  # yellow green
     'Meditation.md': '7678ed',  # yellow green
     'Fiction.md': '29BF12',  # green
+    'Non-Fiction.md': '29BF12',  # green
     'Guitar.md': 'ff8800',  # orange
+    'Guitar Songs.md': 'ff8800',  # orange
     'DSA Trackr.md': '3a86ff',  # blue
     'Codeforces.md': '3a86ff',  # blue
     'Math Prep for College.md': '3a86ff',  # blue
+    'Math for ML.md': '3a86ff',  # blue
     'Web Development.md': '3a86ff',  # blue
     'Touch Typing.md': '00CCCC',  # turquoise
     'Laser Focus.md': 'f94144',  # red
@@ -73,7 +76,7 @@ order = tuple(i for i in colours.keys())
 habits = {k: habits[k] for k in order if k in habits}
 
 for i in habits:
-    name = i.replace('.md', '').replace(
+    name = i.replace('.md', '').replace('-', ' ').replace(
         ' ', '').replace('&', '').replace('@', '')
     function += f'''var {name}_data = {habits[i]['data']};
         var {name}_length = {name}_data.length;
@@ -88,7 +91,7 @@ for i in habits:
 '''
 
 for num, i in enumerate(habits, 5):
-    name = i.replace('.md', '').replace(
+    name = i.replace('.md', '').replace('-', ' ').replace(
         ' ', '').replace('&', '').replace('@', '')
     title = i.replace('.md', '')
     if num == 5:
