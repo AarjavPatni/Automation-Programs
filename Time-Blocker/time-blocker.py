@@ -1,4 +1,5 @@
 from __future__ import print_function
+from sys import argv
 
 import pendulum
 import os.path
@@ -33,7 +34,8 @@ def main():
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file(r"C:\Users\Aarjav\Documents\Automation-Programs\sensitive-data\time-blocker.json", SCOPES)
+            flow = InstalledAppFlow.from_client_secrets_file(
+                r"C:\Users\Aarjav\Documents\Automation-Programs\sensitive-data\time-blocker.json", SCOPES)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
         with open(
@@ -45,7 +47,8 @@ def main():
         service = build("calendar", "v3", credentials=creds)
 
         # Call the Calendar API
-        timeMax = pendulum.today() if int(pendulum.now().to_time_string().split(':')[0]) < 22 else pendulum.now()
+        timeMax = pendulum.today() if (int(
+            pendulum.now().to_time_string().split(':')[0]) < 22) and (len(argv) != 2) else pendulum.now()
         events_result = (
             service.events()
             .list(
@@ -60,14 +63,15 @@ def main():
         events = events_result.get("items", [])
 
         for event in events:
-            service.events().delete(calendarId="primary", eventId=event["id"]).execute()
+            service.events().delete(calendarId="primary",
+                                    eventId=event["id"]).execute()
             print(f'🧹 {event["summary"]}')
 
         notification.notify(
             title="Time-Blocker",
-            message = 'Cleared Calendar!',
+            message='Cleared Calendar!',
             app_icon=r"C:\Users\Aarjav\Documents\Automation-Programs\Time-Blocker\schedule.ico",
-            )
+        )
 
         if not events:
             print("No events found.")
