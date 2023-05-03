@@ -32,7 +32,10 @@ if len(args) > 1:
             with open(k, "r", encoding="utf8") as f:
                 try:
                     content = f.read()
-                    write = True
+                    if 'Streak' in content and 'day-one' in content:
+                        write = True
+                    else:
+                        write = False
                 except Exception:
                     write = False
 
