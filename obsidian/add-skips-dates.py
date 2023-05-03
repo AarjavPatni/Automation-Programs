@@ -48,7 +48,8 @@ for filename in selected_files:
     lines_list = contents.split('\n')
     # Find the second '---' and add a line above it with today's date in the format YYYY-MM-DD with '- ' prepended
     target_string = lines_list.index('---', 1)
-    contents = '\n'.join(lines_list[:target_string] + [f'- {yesterday}'] + ['---'] + lines_list[target_string + 1:])
+    contents = '\n'.join(
+        lines_list[:target_string] + [f'- {yesterday}'] + ['---'] + lines_list[target_string + 1:])
     # Write the modified contents back to the file
     with open(filename, 'w') as file:
         file.write(contents)
