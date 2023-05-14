@@ -27,16 +27,20 @@ def find_markdown_files(directory):
 
 # Call the function to find markdown files in all subdirectories
 find_markdown_files(root_directory)
+selected_files = []
 
 # Print the filenames of the matching files
 print("Matching files:")
 for i, filename in enumerate(matching_files):
-    print(f"{i + 1}.", filename.split('\\')[-1].replace('.md', ''))
-
-# Allow the user to choose one or more files
-choice = input(
-    "Enter the number(s) of the file(s) you want to modify, separated by commas: ")
-selected_files = [matching_files[int(i) - 1] for i in choice.split(',')]
+    filename_without_extension = filename.split('\\')[-1].replace('.md', '')
+    choice = input(f'{filename_without_extension} ')
+    if choice.lower() in ('y', ''):
+        print(
+            "\x1b[1A" + f"\x1b[{len(choice) + len(filename_without_extension)}C" + " ✅")
+    else:
+        print(
+            "\x1b[1A" + f"\x1b[{len(choice) + len(filename_without_extension)}C" + " ❌")
+    selected_files.append(filename) if choice.lower() in ('y', '') else None
 
 yesterday = pendulum.yesterday().to_date_string()
 
