@@ -40,7 +40,7 @@ for i, filename in enumerate(matching_files):
     else:
         print(
             "\x1b[1A" + f"\x1b[{len(choice) + len(filename_without_extension)}C" + " ❌")
-    selected_files.append(filename) if choice.lower() in ('y', '') else None
+        selected_files.append(filename)
 
 yesterday = pendulum.yesterday().to_date_string()
 
