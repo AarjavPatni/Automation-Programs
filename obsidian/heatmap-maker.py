@@ -59,8 +59,10 @@ colours = {
     'Codeforces.md': '3a86ff',  # blue
     'Math Prep for College.md': '3a86ff',  # blue
     'Math for ML.md': '3a86ff',  # blue
+    'USACO Guide.md': '3a86ff',  # blue
     'Web Development.md': '3a86ff',  # blue
     'Touch Typing.md': '00CCCC',  # turquoise
+    'Video Editing.md': '00CCCC',  # turquoise
     'Laser Focus.md': 'f94144',  # red
     'Journaling.md': '06d6a0',  # aqua
     'Brush @ Night.md': 'f4978e',  # peach
