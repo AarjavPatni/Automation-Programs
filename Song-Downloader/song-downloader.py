@@ -8,7 +8,7 @@ from time import sleep
 from itertools import chain
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "1"
 
-with open(r'C:\Users\Aarjav\Documents\Automation-Programs\songs.txt') as f:
+with open(r'C:\Users\Aarjav\Documents\Automation-Programs\Song-Downloader\songs.txt') as f:
     song_list_from_file = [line for line in f]
     songs, artists = [line.split(', ')[0] for line in song_list_from_file], [
         line.split(', ')[1].strip() for line in song_list_from_file]
@@ -27,7 +27,7 @@ driver = webdriver.Edge(
 
 pygame.init()
 pygame.mixer.music.load(
-    r"C:\Users\Aarjav\Documents\Automation-Programs\Ring01.wav")
+    r"C:\Users\Aarjav\Documents\Automation-Programs\Song-Downloader\Ring01.wav")
 
 errors = []
 
