@@ -27,6 +27,9 @@ SetDefaultMouseSpeed, 0
 :*:emapp::aarjavp@outlook.com
 :*:emanon::anonymousse.anonaddy.com
 :*:->::→
+:*:---::---
+:*:-.-::—
+:*:=>::⇒
 
 #t:: send, #3
 
