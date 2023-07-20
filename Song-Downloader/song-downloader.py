@@ -14,7 +14,7 @@ with open(r'C:\Users\Aarjav\Documents\Automation-Programs\Song-Downloader\songs.
         line.split(', ')[1].strip() for line in song_list_from_file]
 
 files_list = list(
-    chain(*[files for root, dirs, files in os.walk(r'C:\Users\Aarjav\Downloads')]))
+    chain(*[files for root, dirs, files in os.walk(r'C:\Users\Aarjav\Music')]))
 
 EdgeService(r'C:\Users\Aarjav\msedgedriver.exe').start()
 # Open edge browser and navigate to the website

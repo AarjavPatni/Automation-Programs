@@ -1,15 +1,15 @@
 # Get a list of all running processes
 from psutil import process_iter
 from time import perf_counter, sleep
-from os import system
+from subprocess import run
 from datetime import datetime as dt
 from threading import Thread
 
 if dt.now().hour >= 22:
-    system("wsl '/mnt/c/Program Files/Cold Turkey/Cold Turkey Blocker.exe' -start 'Distractions' -lock 300 &")
+    run(r'C:\Program Files\Cold Turkey\Cold Turkey Blocker.exe -start "Distractions" -lock 300')
     duration = 300
 else:
-    system("wsl '/mnt/c/Program Files/Cold Turkey/Cold Turkey Blocker.exe' -start 'Distractions' -lock 120 &")
+    run(r'C:\Program Files\Cold Turkey\Cold Turkey Blocker.exe -start "Distractions" -lock 120')
     duration = 120
 
 start = perf_counter()
@@ -20,7 +20,7 @@ start = perf_counter()
 def kill_winget():
     while perf_counter() - start < duration*60:
         for proc in process_iter():
-            if ('winget' in proc.name()) or ('unins000' in proc.name()):
+            if ('winget' in proc.name()) or ('unins000' in proc.name()) or ('taskkill' in proc.name()) or ('run.exe' in proc.name()):
                 proc.kill()
 
 

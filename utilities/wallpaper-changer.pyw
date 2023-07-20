@@ -14,8 +14,8 @@ API_URL = 'https://api.sunrise-sunset.org/json'
 SPI_SETDESKWALLPAPER = 20
 
 # Paths to the daytime and nighttime wallpapers
-DAYTIME_WALLPAPER = r"C:\Users\Aarjav\Downloads\Wallpapers\daytime.jpg"
-NIGHTTIME_WALLPAPER = r"C:\Users\Aarjav\Downloads\Wallpapers\nighttime.png"
+DAYTIME_WALLPAPER = r"C:\Users\Aarjav\Pictures\Wallpapers\daytime.jpg"
+NIGHTTIME_WALLPAPER = r"C:\Users\Aarjav\Pictures\Wallpapers\nighttime.png"
 
 
 def get_sunrise_sunset():
