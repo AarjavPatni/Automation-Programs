@@ -8,7 +8,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 SetDefaultMouseSpeed, 0
 
 +#^/:: Winset, Alwaysontop, , A
-!+p:: run "python" "C:\Users\Aarjav\Documents\Automation-Programs\GTD Capture\GTDCapture.py"
+!+p:: run "python" "C:\Users\Aarjav\Documents\30-39 CS & Programming\30 Personal Projects\Automation-Programs\GTD Capture\GTDcapture.py"
 ;#o:: run "C:\Users\Aarjav\Documents\Automation Programs\enableCamera.lnk"
 ;#+o:: run "C:\Users\Aarjav\Documents\Automation Programs\disableCamera.lnk"
 ;#a:: run "C:\Users\Aarjav\Documents\Automation Programs\enableMic.lnk"
@@ -22,12 +22,9 @@ SetDefaultMouseSpeed, 0
 #e:: Send #+!e
 #w:: return
 #r:: return
-:*:a2c::ApplyingToCollege
 
-:*:emsch::aarjav.p_nms@gemselearning.com
-:*:emgm::aarjav.patni1@gmail.com
-:*:emout::aarjav.patni@outlook.com
-:*:emapp::aarjavp@outlook.com
+:*:emuni::aarjav.patni@uwaterloo.ca
+:*:emgm::ap.aarjavpatni@gmail.com
 :*:emanon::anonymousse.anonaddy.com
 :*:->::→
 :*:---::---

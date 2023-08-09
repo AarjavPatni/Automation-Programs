@@ -24,10 +24,10 @@ def main():
     # created automatically when the authorization flow completes for the first
     # time.
     if os.path.exists(
-        r"C:\Users\Aarjav\Documents\Automation-Programs\sensitive-data\time-blocker-token.json"
+        r"C:\Users\Aarjav\Documents\30-39 CS & Programming\30 Personal Projects\Automation-Programs\sensitive-data\time-blocker-token.json"
     ):
         creds = Credentials.from_authorized_user_file(
-            r"C:\Users\Aarjav\Documents\Automation-Programs\sensitive-data\time-blocker-token.json", SCOPES
+            r"C:\Users\Aarjav\Documents\30-39 CS & Programming\30 Personal Projects\Automation-Programs\sensitive-data\time-blocker-token.json", SCOPES
         )
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
@@ -35,11 +35,11 @@ def main():
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                r"C:\Users\Aarjav\Documents\Automation-Programs\sensitive-data\time-blocker.json", SCOPES)
+                r"C:\Users\Aarjav\Documents\30-39 CS & Programming\30 Personal Projects\Automation-Programs\sensitive-data\time-blocker.json", SCOPES)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
         with open(
-            r"C:\Users\Aarjav\Documents\Automation-Programs\sensitive-data\time-blocker-token.json", "w"
+            r"C:\Users\Aarjav\Documents\30-39 CS & Programming\30 Personal Projects\Automation-Programs\sensitive-data\time-blocker-token.json", "w"
         ) as token:
             token.write(creds.to_json())
 
@@ -70,7 +70,7 @@ def main():
         notification.notify(
             title="Time-Blocker",
             message='Cleared Calendar!',
-            app_icon=r"C:\Users\Aarjav\Documents\Automation-Programs\Time-Blocker\schedule.ico",
+            app_icon=r"C:\Users\Aarjav\Documents\30-39 CS & Programming\30 Personal Projects\Automation-Programs\Time-Blocker\schedule.ico",
         )
 
         if not events:

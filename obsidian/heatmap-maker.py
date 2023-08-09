@@ -135,14 +135,14 @@ for i in habits:
 
 navbar += '\n    </ul>\n  </nav>'
 
-with open(r'C:\Users\Aarjav\Documents\Automation-Programs\obsidian\heatmap.html', 'r', encoding='utf-8') as f:
+with open(r'C:\Users\Aarjav\Documents\30-39 CS & Programming\30 Personal Projects\Automation-Programs\obsidian\heatmap.html', 'r', encoding='utf-8') as f:
     content = f.read()
     content = re.sub(
         r'function App\(\)\s*{((?:[^{}]+|{(?:[^{}]+|{[^{}]*})*})*)\s*}', function, content)
     content = re.sub(r'\s<nav>([\s\S]*?)<\/nav>', navbar, content)
-    with open(r'C:\Users\Aarjav\Documents\Automation-Programs\obsidian\heatmap.html', 'w', encoding='utf-8') as f:
+    with open(r'C:\Users\Aarjav\Documents\30-39 CS & Programming\30 Personal Projects\Automation-Programs\obsidian\heatmap.html', 'w', encoding='utf-8') as f:
         f.write(content)
 
-# open C:\Users\Aarjav\Documents\Automation-Programs\obsidian\heatmap.html
+# open C:\Users\Aarjav\Documents\30-39 CS & Programming\30 Personal Projects\Automation-Programs\obsidian\heatmap.html
 webbrowser.open(
-    r'C:\Users\Aarjav\Documents\Automation-Programs\obsidian\heatmap.html')
+    r'C:\Users\Aarjav\Documents\30-39 CS & Programming\30 Personal Projects\Automation-Programs\obsidian\heatmap.html')
